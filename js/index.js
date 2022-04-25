@@ -38,9 +38,11 @@ function validarProducto (){
     console.log (productoSeleccionado);
     if (baseDatos.some((el) => el.nombreProducto == productoSeleccionado) != true) {
         console.log('Producto NO Existe en Inventario');
+        alert ('El Producto NO Existe en Inventario');
      } else
          {
             console.log('Producto SI Existe en Inventario'); 
+            alert ('El Producto SI Existe en Inventario');
         /* infoProducto = baseDatos.find ((el) => el.nombreProducto == productoSeleccionado)
         console.log(infoProducto);
         console.log(infoProducto.precioProducto);
@@ -54,7 +56,9 @@ console.log(baseDatos);
 
 // CODIGO PARA DESAFIO COMPLEMENTARIO:
 // Crear Elemento
-nuevoContenido = prompt ('Ingrensa EL TITULO PARA UNA NUEVA SECCION: ');
+alert ('INICIO DE DESAFIO COMPLEMENTARIO: AGREGAR UNA ETIQUETA y EDITAR UNA ETIQUETA');
+
+nuevoContenido = prompt ('Ingrensa el TEXTO de la Nueva Etiqueta: ');
 let nuevoparrafo = document.createElement('p');
 nuevoparrafo.innerText = nuevoContenido;
 document.body.prepend(nuevoparrafo);
@@ -65,4 +69,3 @@ nuevoContenido2 = prompt ('Cambia el Subtitulo del Recuerdo Purpura:  ');
 let encabezado = document.getElementById('encabezado');
 encabezado.innerText = nuevoContenido2;
 console.log(encabezado.innerText);
-
