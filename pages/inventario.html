@@ -38,65 +38,6 @@
     </div>
   </div>
 </section>
-<section class="container-fluid">
-    <div class="row d-flex pt-4 cardProducto m-4 ">
-      <div class="col-md-12">
-        <h1 class="text-center">Resumen de su Inventario Actual</h1>
-        <hr class="mt-4">
-      </div>
-      <div class="mb-3justify-content-center">
-        <div class="container row col-md-12">
-          <div class="d-flex col-md-4 offset-1">
-            <p class="align-self-center">Dron Mini 4K</p>
-          </div>
-          <div class="d-flex col-md-1">
-            <p class="align-self-center">1 UN</p>
-          </div>
-          <div class="d-flex col-md-2">
-            <p class="align-self-center">$</p>
-            <p class="align-self-center">Precios</p>
-          </div>
-        </div>
-        <div class="container row col-md-12">
-          <div class="d-flex col-md-4 offset-1">
-            <p class="align-self-center">Dron Mini 4K</p>
-          </div>
-          <div class="d-flex col-md-1">
-            <p class="align-self-center">1 UN</p>
-          </div>
-          <div class="d-flex col-md-2">
-            <p class="align-self-center">$</p>
-            <p class="align-self-center">Precios</p>
-          </div>
-        </div>
-        <div class="container row col-md-12">
-          <div class="d-flex col-md-4 offset-1">
-            <p class="align-self-center">Dron Mini 4K</p>
-          </div>
-          <div class="d-flex col-md-1">
-            <p class="align-self-center">1 UN</p>
-          </div>
-          <div class="d-flex col-md-2">
-            <p class="align-self-center">$</p>
-            <p class="align-self-center">Precios</p>
-          </div>
-        </div>
-        <div class="container row col-md-12">
-          <div class="d-flex col-md-4 offset-1">
-            <p class="align-self-center">Dron Mini 4K</p>
-          </div>
-          <div class="d-flex col-md-1">
-            <p class="align-self-center">1 UN</p>
-          </div>
-          <div class="d-flex col-md-2">
-            <p class="align-self-center">$</p>
-            <p class="align-self-center">Precios</p>
-          </div>
-        </div>
-        </div>  
-      </div>
-      <hr>
-</section>
 <section class="container-fluid d-flex ">
   <div class="row col-md-12 justify-content-center">
     <div class="container col-md-5">
@@ -113,22 +54,22 @@
                         <input type="text" class="form-control" id="InputNombre" required>
                       </div>
                       <div class="mb-3 d-flex">
-                          <label for="InputTelefono" class="col-md-5 form-label">Descripción del Producto</label>
-                          <textarea class="form-control" id="Textarea" rows="3" required></textarea>
+                        <label for="InputModelo" class="col-md-5 form-label">Modelo del Producto</label>
+                        <input type="text" class="form-control" id="InputModelo" required>
+                        </div>
+                      <div class="mb-3 d-flex">
+                        <label for="InputCant" class="col-md-5 form-label">Cantidad a Ingresar</label>
+                        <input type="text" class="form-control" id="InputCant" required>
                       </div>
                       <div class="mb-3 d-flex">
-                        <label for="InputTelefono" class="col-md-5 form-label">Cantidad a Ingresar</label>
-                        <input type="text" class="form-control" id="InputTelefono" required>
-                      </div>
-                      <div class="mb-3 d-flex">
-                        <label for="InputTelefono" class="col-md-5 form-label">Precio del Producto</label>
-                        <input type="text" class="form-control" id="InputTelefono" required>
+                        <label for="InputPrecio" class="col-md-5 form-label">Precio del Producto</label>
+                        <input type="text" class="form-control" id="InputPrecio" required>
                       </div>
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
                         <label class="form-check-label" for="disabledFieldsetCheck">Confirme que desea agregar el producto</label>
                       </div>
-                      <button type="submit" class="btn btn-primary mt-3">Agregar</button>
+                      <button id="botonAgregarInventario" type="submit" class="btn btn-primary mt-3">Agregar</button>
                     </form>
               </div>
           </div>
@@ -145,26 +86,18 @@
               <div class="col-md-10 offset-md-1">
                   <form>
                       <div class="mb-3 pt-5 d-flex">
-                        <label for="InputNombre" class="col-md-5  form-label" >Nombre Producto</label>
-                        <input type="text" class="form-control" id="InputNombre" required>
-                      </div>
-                      <div class="mb-3 d-flex d-none">
-                          <label for="InputTelefono" class="col-md-5 form-label">Descripción del Producto</label>
-                          <textarea class="form-control" id="Textarea" rows="3" required></textarea>
+                        <label for="IdProdEliminar" class="col-md-5  form-label" >Ingrese ID Producto</label>
+                        <input type="text" class="form-control" id="IdProdEliminar" required>
                       </div>
                       <div class="mb-3 d-flex">
-                        <label for="InputTelefono" class="col-md-5 form-label">Cantidad a Eliminar</label>
-                        <input type="text" class="form-control" id="InputTelefono" required>
-                      </div>
-                      <div class="mb-3 d-flex d-none">
-                        <label for="InputTelefono" class="col-md-5 form-label">Precio del Producto</label>
-                        <input type="text" class="form-control" id="InputTelefono" required>
+                        <label for="InputCantEliminar" class="col-md-5 form-label">Cantidad a Eliminar</label>
+                        <input type="text" class="form-control" id="InputCantEliminar" required>
                       </div>
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
                         <label class="form-check-label" for="disabledFieldsetCheck">Confirme que desea eliminar el producto</label>
                       </div>
-                      <button type="submit" class="btn btn-danger mt-3">Eliminar</button>
+                      <button id="botonEliminarInventario" type="submit" class="btn btn-danger mt-3">Eliminar</button>
                     </form>
               </div>
           </div>
@@ -172,6 +105,36 @@
       </div>
     </div>
   </div>
+</section>
+
+<section class="container-fluid">
+    <div class="row d-flex pt-4 cardProducto m-4 ">
+      <div class="col-md-12">
+        <h1 class="text-center pb-4">Resumen de su Inventario Actual</h1>
+        <div class="container col-md-12 d-flex justify-content-center">
+          <div class="d-flex col-md-3">
+              <p class="align-self-center">Nombre Producto</p>
+          </div>
+          <div class="d-flex col-md-2">
+              <p class="align-self-center">Modelo</p>
+          </div>
+          <div class="d-flex col-md-2 justify-content-center">
+            <p class="align-self-center">Stock Disponible</p>
+          </div>
+          <div class="d-flex col-md-2 justify-content-end">
+              <p class="align-self-center"></p>
+              <p class="align-self-center">Precio</p>
+          </div>
+          <div class="d-flex col-md-2 offset-md-1 justify-content-end">
+            <p class="align-self-center">Id Producto</p>
+          </div>
+        </div>
+        <hr class="mt-1">
+      </div>
+      <div id = "listadoInventario" class="mb-3 justify-content-center">
+          <!--Inserta listado de inventario desde Javascript-->      
+      </div>
+    </div>
 </section>
 <footer class="container-fluid mt-5 p-0">
   <div class="row">

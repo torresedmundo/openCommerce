@@ -1,40 +1,110 @@
 
-//Funcion para crear el inventario en la vista del Administrador
-function Inventario (){
-    // Crea el objeto
-    function Producto (nombreProducto, descProducto, stock, precioProducto){
-        this.nombreProducto = nombreProducto;
-        this.descProducto = descProducto;
-        this.stock = stock;
-        this.precioProducto = precioProducto;
-    }
-    let ingNombreProducto = prompt ('Ingrese Nombre Producto:');
-    let ingDescProducto = prompt ('Ingrese Descripción de Producto:');
-    let ingStock = prompt ('Ingrese Cantidad:');
-    let ingPrecioProducto = prompt ('Ingrese Precio Producto:');
-    // pasa los parametros ingresados al objeto
-    nuevoProducto = new Producto (ingNombreProducto, ingDescProducto, ingStock, ingPrecioProducto);
-    console.log(nuevoProducto);
-    //llamo la funciona agregarInventario para pasar este objeto completo a un array
-    agregarInventario()
-}
- 
 let baseDatos = [];
 let carroCompras = [];
 
-function agregarInventario (){
-    // Crea el objeto dentro de un array
-    baseDatos.push(nuevoProducto);
-}
-Inventario();
-Inventario();
-console.log(baseDatos);
-validarProducto ()
+// AGREGAR AL INVENTARIO
+let btnAgregar = document.getElementById("botonAgregarInventario");
+btnAgregar.addEventListener("click", (e) => {
+    e.preventDefault();
+    Inventario()})
 
+function Inventario (){
+    // Crea el objeto
+    function Producto (nombreProducto, modeloProducto, stock, precioProducto, idProducto){
+        this.nombreProducto = nombreProducto;
+        this.modeloProducto = modeloProducto;
+        this.stock = stock;
+        this.precioProducto = precioProducto;
+        this.idProducto = idProducto;
+    }
+    let ingNombreProducto = document.getElementById("InputNombre").value;
+    let ingModeloProducto = document.getElementById("InputModelo").value;
+    let ingStock = document.getElementById("InputCant").value;
+    let ingPrecioProducto = document.getElementById("InputPrecio").value;
+    let idProducto = Date.now();
+    nuevoProducto = new Producto (ingNombreProducto, ingModeloProducto, ingStock, ingPrecioProducto, idProducto);
+    baseDatos.push(nuevoProducto);
+    mostrarInventario();
+}
+console.log(baseDatos);
+
+function mostrarInventario(){
+    let mostrarProductos = document.getElementById("listadoInventario");
+    mostrarProductos.innerHTML = ""; 
+    for (let indice of baseDatos){
+        mostrarProductos.innerHTML += 
+            `<div id = "${indice.idProducto}" class="container col-md-12 d-flex justify-content-center">
+                <div class="d-flex col-md-3">
+                    <p class="align-self-center">${indice.nombreProducto}</p>
+                </div>
+                <div class="d-flex col-md-2">
+                    <p class="align-self-center">${indice.modeloProducto}</p>
+                </div>
+                <div class="d-flex col-md-2 justify-content-center">
+                    <p class="align-self-center ">${indice.stock}</p>
+                </div>
+                <div class="d-flex col-md-2 justify-content-end">
+                    <p class="align-self-center">$</p>
+                    <p class="align-self-center text-end">${indice.precioProducto}</p>
+                </div>
+                <div class="d-flex col-md-3 justify-content-end">
+                    <p class="align-self-center text-end">${indice.idProducto}</p>
+                </div>
+            </div>`
+    }
+}
+
+// ELIMINAR DEL INVENTARIO
+let btnEliminar = document.getElementById("botonEliminarInventario");
+btnEliminar.addEventListener("click", (e) => {
+    e.preventDefault();
+    EliminarInventario()})
+
+function EliminarInventario () {
+    let ingIdProducto = document.getElementById("IdProdEliminar").value;
+    let ingCantEliminar = document.getElementById("InputCantEliminar").value;
+    console.log(ingIdProducto);
+    console.log(ingCantEliminar);
+    if (baseDatos.some((el) => el.idProducto == ingIdProducto) != true) {
+        console.log('Producto NO Existe en Inventario');
+        console.log()
+     } else
+        {
+        let cantidad = baseDatos.find((el) => el.idProducto == ingIdProducto);
+        let indice = baseDatos.findIndex((el) => el.idProducto == ingIdProducto)
+        resultadoStock = cantidad.stock - ingCantEliminar;
+        console.log (resultadoStock);
+        console.log (indice);
+        if (resultadoStock <= 0){
+            console.log('No hay Stock suficiente para compra  - BORRAR DEL INVENTARIO');
+            baseDatos.splice( 
+                baseDatos.findIndex((el) => el.idProducto == ingIdProducto), 1);
+                console.log(baseDatos);
+                mostrarInventario();
+            }  else
+            {
+                console.log('Stock Disponible - SEGUIR MOSTRANDO INVENTARIO');
+                let actualizar = baseDatos.find((el) => el.idProducto == ingIdProducto);
+                actualizar.stock = resultadoStock;
+                console.log(baseDatos);
+                mostrarInventario();
+            }        
+        }
+ }
+    
+
+
+    
+
+
+
+/*
+PARA VISTA DE CLIENTE
+validarProducto ();
 // Funcion para agregar al carro
-function validarProducto (){
+function validarProducto(){
     // Verifica que el producto que desea agregar al carro existe en el inventario
-    productoSeleccionado = prompt ('Ingrese Nombre Producto a comprar:');
+    //productoSeleccionado = prompt ('Ingrese Nombre Producto a comprar:');
     console.log (productoSeleccionado);
     if (baseDatos.some((el) => el.nombreProducto == productoSeleccionado) != true) {
         console.log('Producto NO Existe en Inventario');
@@ -43,29 +113,40 @@ function validarProducto (){
          {
             console.log('Producto SI Existe en Inventario'); 
             alert ('El Producto SI Existe en Inventario');
-        /* infoProducto = baseDatos.find ((el) => el.nombreProducto == productoSeleccionado)
-        console.log(infoProducto);
-        console.log(infoProducto.precioProducto);
-        function agregarCompra (){
-            carroCompras.push(infoProducto.nombreProducto);
-            carroCompras.push(infoProducto.precioProducto);
-            console.log(carroCompras);*/
+            cantProductoSeleccionado = prompt ('Ingrese Cantidad de Productos a comprar:');
+            infoProducto = baseDatos.find ((el) => el.nombreProducto == productoSeleccionado)
+            console.log(infoProducto);
+            resultadoStock = (infoProducto.stock) - cantProductoSeleccionado;
+            if (resultadoStock < 0){
+                console.log('No hay Stock suficiente para su compra');
+                console.log('El Stock máximo para este producto es: ' + infoProducto.stock);
+
+            }  else
+                {
+                    console.log('Stock Disponible y Ahora Agregar al Carro');
+                    Carro();
+                }
     }
 }
-console.log(baseDatos);
 
-// CODIGO PARA DESAFIO COMPLEMENTARIO:
-// Crear Elemento
-alert ('INICIO DE DESAFIO COMPLEMENTARIO: AGREGAR UNA ETIQUETA y EDITAR UNA ETIQUETA');
+function Carro (){
+    function ProductosCarro (nombreProducto, cantCompra, precioProducto){
+        this.nombreProducto = nombreProducto;
+        this.cantCompra = cantCompra;
+        this.precioProducto = precioProducto;
+    }
+    nuevoProductoCarro = new ProductosCarro ((infoProducto.nombreProducto), (cantProductoSeleccionado),(infoProducto.precioProducto));
+    console.log(nuevoProductoCarro);
+    agregarCompra();
+}
 
-nuevoContenido = prompt ('Ingrensa el TEXTO de la Nueva Etiqueta: ');
-let nuevoparrafo = document.createElement('p');
-nuevoparrafo.innerText = nuevoContenido;
-document.body.prepend(nuevoparrafo);
-console.log(nuevoparrafo);
+function agregarCompra (){
+    console.log('en funcion agregar compra');
+    carroCompras.push(nuevoProductoCarro);
+    console.log(carroCompras);
+}
+let nombre = document.getElementById("nombreProducto");
+nombre.innerText = (ProductosCarro.nombreProducto);
+console.log(nombreProducto[0]);
 
-//Modificar Elemento
-nuevoContenido2 = prompt ('Cambia el Subtitulo del Recuerdo Purpura:  ');
-let encabezado = document.getElementById('encabezado');
-encabezado.innerText = nuevoContenido2;
-console.log(encabezado.innerText);
+ */
