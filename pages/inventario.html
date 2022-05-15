@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,8 +127,18 @@
           <!--Inserta listado de inventario desde Javascript-->      
       </div>
     </div>
-</section>
-<footer class="container-fluid mt-5 p-0">
+  </section>
+  <section>
+    <div class="container-fluid col-md-12">
+      <div class="container col-md-6 justify-content-center">
+        <p class="fs-4 text-center mt-5">Gráfico Dinámico de Stock de Productos</p>
+        <canvas id="myChart">
+                    <!--Inserta Grafico desde Javascript-->      
+        </canvas>
+      </div>
+    </div>
+  </section>
+  <footer class="container-fluid mt-5 p-0">
   <div class="row">
     <div class="container">
       <div class="text-center fs-4 colorSection3 textoBlanco">
@@ -139,5 +149,6 @@
 </footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js" ></script>
 <script src="../js/index.js" crossorigin="anonymous"></script>
 </html>
