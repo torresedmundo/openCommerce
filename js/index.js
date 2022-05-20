@@ -7,14 +7,34 @@ let modelGrafico =[];
 let bdLocalOrdenada=[];
 let graficoNuevo;
 
+
+
 //Validación de Local Storage
 localStorage.length > 0 ? console.log('El Local Storage tiene Datos') : console.log('El Local Storage esta VACIO');
+
 
 if (localStorage.length > 0) {
     extraerLocal();
     baseDatos = bdLocal;
     actualizaGrafico();
+} else{
+    pedirPosts();
+    console.log('en el else')
 }
+
+
+//Carga de Productos base para simulacion cuando inventario está vacio
+const pedirPosts = async () => {
+    const resp = await fetch('../json/productos.json')
+    const data = await resp.json()
+    console.log(data);
+    baseDatos = data;
+    guardarLocal();
+   
+}
+
+
+
 
 
 // AGREGAR AL INVENTARIO
