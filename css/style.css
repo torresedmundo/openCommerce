@@ -5,7 +5,7 @@
 
 
 .altoSeccion{
-height: 20rem;
+    height: 20rem;
 }
 
 a:hover{
@@ -17,7 +17,7 @@ button:hover{
     color: white;
 }
 .tamImgCarro{
-    width: 10%;
+    width: 4rem;
 }
 
 .textoBlanco{
@@ -50,7 +50,7 @@ button:hover{
     background-color: yellow;
 }
 .colorSection2{
-    background-color: blueviolet;
+    background-color: rgb(255, 105, 150);
 }
 .colorSection3{
     background-color:rgb(165, 165, 165);

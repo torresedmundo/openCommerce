@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,323 +9,129 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <header class="container-fluid d-flex colorSection3">
-    <div class="container">
-        <div class="row">
-          <div class="col-md-12 d-flex "> 
-            <div class="text-center col-md-3 align-self-center">
-              <a class="textoBlanco d-flex justify-content-start" aria-current="page" href="./index.html"><img src="./img/logo.png" class="tamImgCarro">Ecommerce </a>
-            </div>
-            <div class="col-md-5">
-              <form class="d-flex">
-                <input class="form-control m-2 " type="search" placeholder="Search" aria-label="Search">
-              </form>
-            </div>
-            <div class="text-center col-md-3 align-self-center d-flex justify-content-start">
-                <img src="./img/carrito.png" type="button" class="tamImgCarro"  alt="imagen carrito">
-                <a href="./pages/compra.html" class="btn btn-primary rounded-circle ms-2">7</a>
-            </div>
-            <div class="text-center col-md-1 align-self-center d-flex justify-content-end">
-              <a href="./pages/inventario.html" class="btn btn-primary ms-2">Administrador</a>
-          </div>
-          </div>
+<header class="container-fluid d-flex colorSection3 justify-content-center">
+    <div class="row">
+      <div class="container">
+        <div class="text-center">
+          <p class="textoBlanco pt-3 fs-2">Bienvenido al Inventario</p>
+          <p id="encabezado" class="textoBlanco fs-4">En esta sección podra agregar y eliminar productos a su stock disponible</p>
         </div>
+      </div>
     </div>
 </header>
-<section class="container-fluid colorSection2 pt-2">
+<section class="container-fluid colorSection2 pt-4">
+</section>
+<section class="container-fluid d-flex mt-5">
+  <div class="row col-md-12 justify-content-center">
+    <div class="container col-md-5">
+      <div class=" pt-4 cardProducto m-4">
+        <div class="">
+          <p class="fs-4 text-center">Agregar Productos del Inventario</p>
+        </div>
+        <div class="container">
+          <div class="row">
+              <div class="col-md-10 offset-md-1">
+                  <form>
+                      <div class="mb-3 pt-5 d-flex">
+                        <label for="InputNombre" class="col-md-5  form-label" >Nombre Producto</label>
+                        <input type="text" class="form-control" id="InputNombre" required>
+                      </div>
+                      <div class="mb-3 d-flex">
+                        <label for="InputModelo" class="col-md-5 form-label">Modelo del Producto</label>
+                        <input type="text" class="form-control" id="InputModelo" required>
+                      </div>
+                      <div class="mb-3 d-flex">
+                        <label for="InputCant" class="col-md-5 form-label">Cantidad a Ingresar</label>
+                        <input type="number" class="form-control" id="InputCant" required>
+                      </div>
+                      <div class="mb-3 d-flex">
+                        <label for="InputPrecio" class="col-md-5 form-label">Precio del Producto</label>
+                        <input type="number" class="form-control" id="InputPrecio" required>
+                      </div>
+                      <button  id="botonAgregarInventario" type="submit" class="btn btn-primary mt-3">Agregar</button>
+                  </form>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container col-md-5">
+      <div class=" pt-4 cardProducto m-4">
+        <div class="">
+          <p class="fs-4 text-center">Eliminar Productos del Inventario</p>
+        </div>
+        <div class="container">
+          <div class="row">
+              <div class="col-md-10 offset-md-1">
+                  <form>
+                      <div class="mb-3 pt-5 d-flex">
+                        <label for="IdProdEliminar" class="col-md-5  form-label" >Ingrese ID Producto</label>
+                        <input type="number" class="form-control" id="IdProdEliminar" required>
+                      </div>
+                      <div class="mb-3 d-flex">
+                        <label for="InputCantEliminar" class="col-md-5 form-label">Cantidad a Eliminar</label>
+                        <input type="number" class="form-control" id="InputCantEliminar" required>
+                      </div>
+                      <button id="botonEliminarInventario" type="submit" class="btn btn-danger mt-3">Eliminar</button>
+                    </form>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container-fluid">
+    <div class="row d-flex pt-4 cardProducto m-4 ">
+      <div class="col-md-12">
+        <h1 class="text-center pb-4">Resumen de su Inventario Actual</h1>
+        <div class="container col-md-12 d-flex justify-content-center">
+          <div class="d-flex col-md-3">
+              <p class="align-self-center">Nombre Producto</p>
+          </div>
+          <div class="d-flex col-md-2">
+              <p class="align-self-center">Modelo</p>
+          </div>
+          <div class="d-flex col-md-2 justify-content-center">
+            <p class="align-self-center">Stock Disponible</p>
+          </div>
+          <div class="d-flex col-md-2 justify-content-end">
+              <p class="align-self-center"></p>
+              <p class="align-self-center">Precio</p>
+          </div>
+          <div class="d-flex col-md-2 offset-md-1 justify-content-end">
+            <p class="align-self-center">Id Producto</p>
+          </div>
+        </div>
+        <hr class="mt-1">
+      </div>
+      <div id = "listadoInventario" class="mb-3 justify-content-center">
+          <!--Inserta listado de inventario desde Javascript-->      
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container-fluid col-md-12">
+      <div class="container col-md-6 justify-content-center">
+        <p class="fs-4 text-center mt-5">Gráfico Dinámico de Stock de Productos</p>
+        <canvas id="myChart">
+                    <!--Inserta Grafico desde Javascript-->      
+        </canvas>
+      </div>
+    </div>
+  </section>
+  <footer class="container-fluid mt-5 p-0">
   <div class="row">
     <div class="container">
-      <div class="text-center fs-4">
-        <p class="textoBlanco">Encuentra los mejores productos a los mejores precios</p>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="container mt-1">
-  <div class="row">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="./img/ban1.png" class="d-block w-100" alt="imag banner 1">
-        </div>
-        <div class="carousel-item">
-          <img src="./img/ban2.png" class="d-block w-100" alt="imag banner 1">
-        </div>
-        <div class="carousel-item">
-          <img src="./img/ban3.png" class="d-block w-100" alt="imag banner 1">
-        </div>
-        <div class="carousel-item">
-          <img src="./img/ban4.png" class="d-block w-100" alt="imag banner 1">
-        </div>
-        <div class="carousel-item">
-          <img src="./img/ban5.png" class="d-block w-100" alt="imag banner 1">
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </div>
-</section>
-<section class="container">
-        <div class="row d-flex pt-5">
-          <div class="col-md-2 cardProducto mx-auto">
-            <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-            <hr>
-            <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-            <p class="">Dron Mini 4K</p>
-            <div class="d-flex justify-content-center">
-              <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-            </div>
-          </div>
-          <div class="col-md-2 cardProducto mx-auto">
-            <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-            <hr>
-            <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-            <p class="">Dron Mini 4K</p>
-            <div class="d-flex justify-content-center">
-              <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-            </div>
-          </div>
-          <div class="col-md-2 cardProducto mx-auto">
-            <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-            <hr>
-            <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-            <p class="">Dron Mini 4K</p>
-            <div class="d-flex justify-content-center">
-              <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-            </div>
-          </div>
-          <div class="col-md-2 cardProducto mx-auto">
-            <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-            <hr>
-            <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-            <p class="">Dron Mini 4K</p>
-            <div class="d-flex justify-content-center">
-              <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-            </div>
-          </div>
-          <div class="col-md-2 cardProducto mx-auto">
-            <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-            <hr>
-            <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-            <p class="">Dron Mini 4K</p>
-            <div class="d-flex justify-content-center">
-              <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-            </div>
-          </div>
-      </div>
-      <div class="row d-flex pt-5">
-        <div class="col-md-2 cardProducto mx-auto">
-          <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-          <hr>
-          <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-          <p class="">Dron Mini 4K</p>
-          <div class="d-flex justify-content-center">
-            <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-          </div>
-        </div>
-        <div class="col-md-2 cardProducto mx-auto">
-          <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-          <hr>
-          <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-          <p class="">Dron Mini 4K</p>
-          <div class="d-flex justify-content-center">
-            <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-          </div>
-        </div>
-        <div class="col-md-2 cardProducto mx-auto">
-          <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-          <hr>
-          <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-          <p class="">Dron Mini 4K</p>
-          <div class="d-flex justify-content-center">
-            <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-          </div>
-        </div>
-        <div class="col-md-2 cardProducto mx-auto">
-          <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-          <hr>
-          <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-          <p class="">Dron Mini 4K</p>
-          <div class="d-flex justify-content-center">
-            <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-          </div>
-        </div>
-        <div class="col-md-2 cardProducto mx-auto">
-          <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-          <hr>
-          <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-          <p class="">Dron Mini 4K</p>
-          <div class="d-flex justify-content-center">
-            <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-          </div>
-        </div>
-    </div>
-    <div class="row d-flex pt-5">
-      <div class="col-md-2 cardProducto mx-auto">
-        <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-        <hr>
-        <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-        <p class="">Dron Mini 4K</p>
-        <div class="d-flex justify-content-center">
-          <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-        </div>
-      </div>
-      <div class="col-md-2 cardProducto mx-auto">
-        <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-        <hr>
-        <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-        <p class="">Dron Mini 4K</p>
-        <div class="d-flex justify-content-center">
-          <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-        </div>
-      </div>
-      <div class="col-md-2 cardProducto mx-auto">
-        <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-        <hr>
-        <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-        <p class="">Dron Mini 4K</p>
-        <div class="d-flex justify-content-center">
-          <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-        </div>
-      </div>
-      <div class="col-md-2 cardProducto mx-auto">
-        <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-        <hr>
-        <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-        <p class="">Dron Mini 4K</p>
-        <div class="d-flex justify-content-center">
-          <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-        </div>
-      </div>
-      <div class="col-md-2 cardProducto mx-auto">
-        <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-        <hr>
-        <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-        <p class="">Dron Mini 4K</p>
-        <div class="d-flex justify-content-center">
-          <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-        </div>
-      </div>
-  </div>
-  <div class="row d-flex pt-5">
-    <div class="col-md-2 cardProducto mx-auto">
-      <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-      <hr>
-      <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-      <p class="">Dron Mini 4K</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-      </div>
-    </div>
-    <div class="col-md-2 cardProducto mx-auto">
-      <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-      <hr>
-      <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-      <p class="">Dron Mini 4K</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-      </div>
-    </div>
-    <div class="col-md-2 cardProducto mx-auto">
-      <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-      <hr>
-      <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-      <p class="">Dron Mini 4K</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-      </div>
-    </div>
-    <div class="col-md-2 cardProducto mx-auto">
-      <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-      <hr>
-      <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-      <p class="">Dron Mini 4K</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-      </div>
-    </div>
-    <div class="col-md-2 cardProducto mx-auto">
-      <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-      <hr>
-      <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-      <p class="">Dron Mini 4K</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-      </div>
-    </div>
-  </div>
-  <div class="row d-flex pt-5">
-    <div class="col-md-2 cardProducto mx-auto">
-      <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-      <hr>
-      <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-      <p class="">Dron Mini 4K</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-      </div>
-    </div>
-    <div class="col-md-2 cardProducto mx-auto">
-      <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-      <hr>
-      <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-      <p class="">Dron Mini 4K</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-      </div>
-    </div>
-    <div class="col-md-2 cardProducto mx-auto">
-      <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-      <hr>
-      <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-      <p class="">Dron Mini 4K</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-      </div>
-    </div>
-    <div class="col-md-2 cardProducto mx-auto">
-      <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-      <hr>
-      <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-      <p class="">Dron Mini 4K</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-      </div>
-    </div>
-    <div class="col-md-2 cardProducto mx-auto">
-      <img src="./img/dron3.png" alt="grafico1" class="img-fluid">
-      <hr>
-      <p class="fs-5 text-center textoPrecios">$49.990.-</p>
-      <p class="">Dron Mini 4K</p>
-      <div class="d-flex justify-content-center">
-        <button type="button" href="#"  class="botonProducto">Agregar al Carro</a>
-      </div>
-    </div>
-  </div>
-</section>
-<footer class="container-fluid mt-5 p-0">
-  <div class="row">
-    <div class="container">
-      <div class="text-center fs-4 colorSection3 textoBlanco">
-        <p>Este es un FOOTER</p>
+      <div class="text-center fs-5 colorSection3 textoBlanco mt-5">
+        <p class="text-white pt-5 pb-5" href=""> © 2022 Copyright - By Ed</p>
       </div>
     </div>
   </div>
 </footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<!-- <script src="./js/index.js" crossorigin="anonymous"></script> -->
- </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js" ></script>
+<script src="./js/index.js" crossorigin="anonymous"></script>
+</html>

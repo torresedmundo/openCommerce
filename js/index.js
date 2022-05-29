@@ -8,40 +8,36 @@ let bdLocalOrdenada=[];
 let graficoNuevo;
 
 
-
-//Validación de Local Storage
+//Validación de Local Storage y carga inicial de datos
 localStorage.length > 0 ? console.log('El Local Storage tiene Datos') : console.log('El Local Storage esta VACIO');
-
-
-if (localStorage.length > 0) {
-    extraerLocal();
-    baseDatos = bdLocal;
-    actualizaGrafico();
-} else{
-    pedirPosts();
-    console.log('en el else')
-}
+window.onload = ()=>{
+    if (localStorage.length > 0) {
+        extraerLocal();
+        baseDatos = bdLocal;
+        actualizaGrafico();
+    } else{
+        pedirPosts();
+        console.log('en el else')
+    }
+};
 
 
 //Carga de Productos base para simulacion cuando inventario está vacio
 const pedirPosts = async () => {
-    const resp = await fetch('../json/productos.json')
+    const resp = await fetch('./json/productos.json')
     const data = await resp.json()
     console.log(data);
     baseDatos = data;
     guardarLocal();
    
-}
-
-
-
-
+} 
 
 // AGREGAR AL INVENTARIO
 let btnAgregar = document.getElementById("botonAgregarInventario");
 btnAgregar.addEventListener("click", (e) => {
     e.preventDefault();
-    inventario()})
+    inventario();
+    });
 
 function inventario (){
     // Crea el objeto
@@ -52,15 +48,41 @@ function inventario (){
         this.precioProducto = precioProducto;
         this.idProducto = idProducto;
     }
-    let ingNombreProducto = document.getElementById("InputNombre").value;
-    let ingModeloProducto = document.getElementById("InputModelo").value;
-    let ingStock = document.getElementById("InputCant").value;
-    let ingPrecioProducto = document.getElementById("InputPrecio").value;
+    let ingNombreProducto = document.getElementById("InputNombre").value.toUpperCase();
+    let ingModeloProducto = document.getElementById("InputModelo").value.toUpperCase();
+    let ingStock = parseInt (document.getElementById("InputCant").value);
+    let ingPrecioProducto = parseInt (document.getElementById("InputPrecio").value);
     let idProducto = Date.now();
+
+
+    // Validacion de ingreso de producto ya existentes
+    if (bdLocal.some((el) => el.nombreProducto == ingNombreProducto && el.modeloProducto == ingModeloProducto)) {
+        console.log('Producto Ingresado YA Existe en Inventario; se sumará al stock ya disponible y Reemplazar precio');
+        let nombreCompleto = ingNombreProducto + ingModeloProducto;
+        console.log(nombreCompleto);
+        let productoExistente = bdLocal.find((el) => el.nombreProducto.concat(el.modeloProducto)==nombreCompleto);
+        resultadoStock = productoExistente.stock + ingStock;
+        productoExistente.stock = resultadoStock;
+        productoExistente.precioProducto = ingPrecioProducto;
+        console.log(bdLocal);
+        baseDatos = bdLocal;
+        guardarLocal();
+        document.getElementById("InputNombre").value = "";
+        document.getElementById("InputModelo").value = "";
+        document.getElementById("InputCant").value = "";
+        document.getElementById("InputPrecio").value = "";
+
+    } else
+    {
+    console.log('Producto Ingresado NO Existe en Inventario');
     nuevoProducto = new Producto (ingNombreProducto, ingModeloProducto, ingStock, ingPrecioProducto, idProducto);
     baseDatos.push(nuevoProducto);
     guardarLocal();
-}
+    document.getElementById("InputNombre").value = "";
+    document.getElementById("InputModelo").value = "";
+    document.getElementById("InputCant").value = "";
+    document.getElementById("InputPrecio").value = "";
+}}
 
 function guardarLocal(){
     console.log(baseDatos);
@@ -74,7 +96,7 @@ function extraerLocal(){
     bdLocal = JSON.parse(localStorage.getItem('bdLocal'));
     console.log(bdLocal);
     mostrarInventario();
-    actualizaGrafico()
+    actualizaGrafico();
 }
 
 
@@ -111,16 +133,19 @@ btnEliminar.addEventListener("click", (e) => {
     e.preventDefault();
     EliminarInventario()})
     
-    function EliminarInventario () {
-        let ingIdProducto = document.getElementById("IdProdEliminar").value;
-        let ingCantEliminar = document.getElementById("InputCantEliminar").value;
+function EliminarInventario () {
+        let ingIdProducto = parseInt (document.getElementById("IdProdEliminar").value);
+        let ingCantEliminar = parseInt (document.getElementById("InputCantEliminar").value);
         console.log(ingIdProducto);
         console.log(ingCantEliminar);
         if (bdLocal.some((el) => el.idProducto == ingIdProducto) != true) {
             console.log('Producto NO Existe en Inventario');
+            document.getElementById("IdProdEliminar").value = "";
+            document.getElementById("InputCantEliminar").value = "";
         } else
         {
             let cantidad = bdLocal.find((el) => el.idProducto == ingIdProducto);
+            console.log(cantidad);
             let indice = bdLocal.findIndex((el) => el.idProducto == ingIdProducto)
             resultadoStock = cantidad.stock - ingCantEliminar;
             console.log (resultadoStock);
@@ -134,6 +159,8 @@ btnEliminar.addEventListener("click", (e) => {
                     guardarLocal();
                     //localStorage.removeItem('bdLocal');
                     mostrarInventario();
+                    document.getElementById("IdProdEliminar").value = "";
+                    document.getElementById("InputCantEliminar").value = "";
                 }  else
                 {
                     console.log('Stock Disponible - SEGUIR MOSTRANDO INVENTARIO');
@@ -143,16 +170,19 @@ btnEliminar.addEventListener("click", (e) => {
                     baseDatos = bdLocal;
                     guardarLocal();
                     mostrarInventario();
+                    document.getElementById("IdProdEliminar").value = "";
+                    document.getElementById("InputCantEliminar").value = "";
                 }        
             }
         }
 
 function actualizaGrafico(){
+    baseDatos.sort(((a, b) => b.stock - a.stock));
     stockGraficos = baseDatos.map((el) => el.stock);
     productoGraficos = baseDatos.map((el) => el.nombreProducto.concat(" ").concat(el.modeloProducto));
     console.log (stockGraficos);
     console.log (productoGraficos);
-    let chartStatus = Chart.getChart("myChart"); // <canvas> id
+    let chartStatus = Chart.getChart("myChart");
     if (graficoNuevo != undefined) {
         graficoNuevo.destroy();
     }
@@ -181,124 +211,7 @@ function actualizaGrafico(){
                 y: {
                     beginAtZero: true
                 },
-                ticks:{
-                    display: true
-            }
             }
         }
     })
 }
-
-
-/* function graficoConFechas(titulo,cantidad,tipo,encabezado,id) {
-        
-    var ctx = document.getElementById(id).getContext('2d');
-    if (myChart) {
-        myChart.destroy();
-    }
-    myChart = new Chart(ctx, { ...};
-}  
----
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-
-
-
-
----
-
-
-
-
-
-
-
-
- */
-
-/*
-IDEAS - PARA VISTA DE CLIENTE
-validarProducto ();
-// Funcion para agregar al carro
-function validarProducto(){
-    // Verifica que el producto que desea agregar al carro existe en el inventario
-    //productoSeleccionado = prompt ('Ingrese Nombre Producto a comprar:');
-    console.log (productoSeleccionado);
-    if (baseDatos.some((el) => el.nombreProducto == productoSeleccionado) != true) {
-        console.log('Producto NO Existe en Inventario');
-        alert ('El Producto NO Existe en Inventario');
-     } else
-         {
-            console.log('Producto SI Existe en Inventario'); 
-            alert ('El Producto SI Existe en Inventario');
-            cantProductoSeleccionado = prompt ('Ingrese Cantidad de Productos a comprar:');
-            infoProducto = baseDatos.find ((el) => el.nombreProducto == productoSeleccionado)
-            console.log(infoProducto);
-            resultadoStock = (infoProducto.stock) - cantProductoSeleccionado;
-            if (resultadoStock < 0){
-                console.log('No hay Stock suficiente para su compra');
-                console.log('El Stock máximo para este producto es: ' + infoProducto.stock);
-
-            }  else
-                {
-                    console.log('Stock Disponible y Ahora Agregar al Carro');
-                    Carro();
-                }
-    }
-}
-
-function Carro (){
-    function ProductosCarro (nombreProducto, cantCompra, precioProducto){
-        this.nombreProducto = nombreProducto;
-        this.cantCompra = cantCompra;
-        this.precioProducto = precioProducto;
-    }
-    nuevoProductoCarro = new ProductosCarro ((infoProducto.nombreProducto), (cantProductoSeleccionado),(infoProducto.precioProducto));
-    console.log(nuevoProductoCarro);
-    agregarCompra();
-}
-
-function agregarCompra (){
-    console.log('en funcion agregar compra');
-    carroCompras.push(nuevoProductoCarro);
-    console.log(carroCompras);
-}
-let nombre = document.getElementById("nombreProducto");
-nombre.innerText = (ProductosCarro.nombreProducto);
-console.log(nombreProducto[0]);
-
-*/

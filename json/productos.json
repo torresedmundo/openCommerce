@@ -1,4 +1,4 @@
 [
-    {"nombreProducto": "Macbook", "modeloProducto": "Pro", "stock": 26, "precioProducto": 800000, "idProducto": 1},
-    {"nombreProducto": "ipad", "modeloProducto": "Air", "stock": 20, "precioProducto": 500000, "idProducto": 2}
+    {"nombreProducto": "MACBOOK", "modeloProducto": "PRO", "stock": 26, "precioProducto": 800000, "idProducto": 1},
+    {"nombreProducto": "IPAD", "modeloProducto": "AIR", "stock": 20, "precioProducto": 500000, "idProducto": 2}
 ]
